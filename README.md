@@ -1,8 +1,4 @@
-# the-insta
-
-## v1.0 Demo
-
-![todo_demo](/assets/todo_demo.gif)
+# the-fast
 
 # venv 
 1. Create venv name with mysite
