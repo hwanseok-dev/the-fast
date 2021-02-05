@@ -3,7 +3,7 @@ from .models import Fcuser
 
 
 class FcuserAdmin(admin.ModelAdmin):
-    list_display = ('email',)
+    list_display = ('email', 'password')
 
 
 admin.site.register(Fcuser, FcuserAdmin)
