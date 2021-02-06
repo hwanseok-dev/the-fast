@@ -19,7 +19,7 @@ class RegisterForm(forms.Form):
         error_messages={
             'required': '상품명을 입력해주세요.'
         },
-        max_length=64, label='상품설명'
+        label='상품설명'
     )
     stock = forms.IntegerField(
         error_messages={
