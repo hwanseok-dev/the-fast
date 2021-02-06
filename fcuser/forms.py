@@ -1,5 +1,6 @@
 from django import forms
-from django.contrib.auth.hashers import check_password, make_password
+from django.contrib.auth.hashers import check_password
+
 from .models import Fcuser
 
 
@@ -34,8 +35,6 @@ class LoginForm(forms.Form):
 
             if not check_password(password, fcuser.password):
                 self.add_error('password', '비밀번호가 틀렸습니다.')
-            else:
-                self.email = fcuser.email
 
 
 class RegisterForm(forms.Form):
@@ -70,12 +69,3 @@ class RegisterForm(forms.Form):
             if password != re_password:
                 self.add_error('password', '비밀번호가 서로 다릅니다.')
                 self.add_error('re_password', '비밀번호가 서로 다릅니다.')
-            else:
-                fcuser = Fcuser(
-                    email=email,
-                    password=make_password(password)
-                )
-                fcuser.save()
-                # TODO unique email Integrity Eror
-                # except Fcuser.IntegrityError:
-                #     self.add_error('email', '이미 존재하는 이메일입니다.')

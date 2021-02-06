@@ -11,13 +11,13 @@ class RegisterForm(forms.Form):
     )
     price = forms.IntegerField(
         error_messages={
-            'required': '상품명을 입력해주세요.'
+            'required': '상품가격을 입력해주세요.'
         },
         label='상품가격'
     )
     description = forms.CharField(
         error_messages={
-            'required': '상품명을 입력해주세요.'
+            'required': '상품설명을 입력해주세요.'
         },
         label='상품설명'
     )
@@ -39,11 +39,8 @@ class RegisterForm(forms.Form):
         description = cleaned_date.get('description')
         stock = cleaned_date.get('stock')
 
-        if name and price and description and stock:
-            product = Product(
-                name=name,
-                price=price,
-                description=description,
-                stock=stock
-            )
-            product.save()
+        if not(name and price and description and stock):
+            self.add_error('name','상품 이름을 입력해주세요.')
+            self.add_error('price','상품 가격을 입력해주세요.')
+            self.add_error('description','상품설명을 입력해주세요.')
+            self.add_error('stock','재고를 입력해주세요')

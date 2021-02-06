@@ -1,11 +1,14 @@
-from django.shortcuts import render, redirect
+from django.db import transaction
+from django.shortcuts import redirect
+from django.utils.decorators import method_decorator
 from django.views.generic import ListView
 from django.views.generic.edit import FormView
-from .models import Order
-from .forms import RegisterForm
-from django.utils.decorators import method_decorator
-from fcuser.decoraters import login_required
 
+from fcuser.decoraters import login_required
+from fcuser.models import Fcuser
+from product.models import Product
+from .forms import RegisterForm
+from .models import Order
 
 @method_decorator(login_required, name='dispatch')
 class OrderList(ListView):
@@ -24,8 +27,22 @@ class OrderRegister(FormView):
     form_class = RegisterForm
     success_url = '/product/'
 
+    def form_valid(self, form):
+        with transaction.atomic():
+            prod = Product.objects.get(pk=form.data.get('product'))
+            fcuser = self.request.session.get('user')
+            order = Order(
+                quantity=form.data.get('quantity'),
+                product=prod,
+                fcuser=Fcuser.objects.get(email=fcuser)
+            )
+            order.save()
+            prod.stock -= int(form.data.get('quantity'))
+            prod.save()
+        return super().form_valid(form)
+
     def form_invalid(self, form):
-        return redirect('/product/' + str(form.product))
+        return redirect('/product/' + str(form.data.get('product')))
 
     def get_form_kwargs(self, **kwargs):
         # Build the keyword arguments required to instantiate the form.
