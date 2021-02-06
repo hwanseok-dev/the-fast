@@ -5,6 +5,16 @@ from .models import Order
 from .forms import RegisterForm
 
 
+class OrderList(ListView):
+    model = Order
+    template_name = 'order.html'
+    # templates/order.html에서 object_list 대신 사용할 이름
+    context_object_name = 'order_list'
+
+    def get_queryset(self):
+        queryset = Order.objects.filter(fcuser__email=self.request.session.get('user'))
+        return queryset
+
 class OrderRegister(FormView):
     # template_name은 상품 상세 페이지에서 보여지기 때문에 지정하지 않는다. \
     form_class = RegisterForm
