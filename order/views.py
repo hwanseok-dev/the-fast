@@ -3,8 +3,11 @@ from django.views.generic import ListView
 from django.views.generic.edit import FormView
 from .models import Order
 from .forms import RegisterForm
+from django.utils.decorators import method_decorator
+from fcuser.decoraters import login_required
 
 
+@method_decorator(login_required, name='dispatch')
 class OrderList(ListView):
     model = Order
     template_name = 'order.html'
@@ -15,6 +18,7 @@ class OrderList(ListView):
         queryset = Order.objects.filter(fcuser__email=self.request.session.get('user'))
         return queryset
 
+@method_decorator(login_required, name='dispatch')
 class OrderRegister(FormView):
     # template_name은 상품 상세 페이지에서 보여지기 때문에 지정하지 않는다. \
     form_class = RegisterForm
@@ -28,6 +32,6 @@ class OrderRegister(FormView):
         # RegisterForm 인스턴스를 생성하기 위해 필요한 인자를 업데이트
         kw = super().get_form_kwargs(**kwargs)
         kw.update({
-            'request' : self.request
+            'request': self.request
         })
         return kw
