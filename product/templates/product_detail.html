@@ -35,6 +35,7 @@
                     <li class="list-group-item">상품 가격 : {{ product.price |intcomma }}원</li>
                     <li class="list-group-item">등록 날짜 : {{ product.register_date|date:"Y-m-d H:i" }}</li>
                     <li class="list-group-item">상품 설명 : {{ product.description|safe }}</li>
+                    <li class="list-group-item">재고 : {{ product.stock }}개</li>
                 </ul>
             </div>
         </div>
