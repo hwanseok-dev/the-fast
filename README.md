@@ -1,4 +1,9 @@
+# Pivoting!
+
 본 프로젝트는 현재 django+react 기반 백오피스 프로젝트로 변경되고 있습니다.  
+
+![backoffice-0](/assets/images/backoffice-0.jpg)  
+
 
 # the-fast
 
