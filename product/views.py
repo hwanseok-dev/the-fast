@@ -1,11 +1,34 @@
 from django.views.generic import ListView, DetailView
-from django.views.generic import ListView, DetailView
 from django.views.generic.edit import FormView
+from rest_framework import generics, mixins
 from django.utils.decorators import method_decorator
 from fcuser.decoraters import admin_required
 from order.forms import RegisterForm as OrderRegisterForm
 from .forms import RegisterForm
 from .models import Product
+from .serializers import ProductSerializer
+
+class ProductListAPI(generics.GenericAPIView, mixins.ListModelMixin):
+    # 데이터의 검증을 위해 serializer 등록 필수
+    serializer_class = ProductSerializer
+
+    def get_queryset(self):
+        return Product.objects.all().order_by('id')
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+class ProductDetailAPI(generics.GenericAPIView, mixins.RetrieveModelMixin):
+    # 데이터의 검증을 위해 serializer 등록 필수
+    serializer_class = ProductSerializer
+
+    # detail에 대한 API이지만 전체 queryset에서 전달받은 pk와 매칭되는 object만 api로 제공해준다.
+    def get_queryset(self):
+        return Product.objects.all().order_by('id')
+
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
 
 class ProductList(ListView):
     model = Product

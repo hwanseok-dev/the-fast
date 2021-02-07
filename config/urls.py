@@ -1,7 +1,10 @@
 from django.contrib import admin
 from django.urls import path
 from fcuser.views import index, logout, RegisterView, LoginView
-from product.views import ProductList, ProductRegister, ProductDetail
+from product.views import (
+    ProductList, ProductRegister, ProductDetail,
+    ProductListAPI, ProductDetailAPI
+)
 from order.views import OrderList, OrderRegister
 
 urlpatterns = [
@@ -14,5 +17,7 @@ urlpatterns = [
     path('product/<int:pk>/', ProductDetail.as_view()),
     path('product/register/', ProductRegister.as_view()),
     path('order/', OrderList.as_view()),
-    path('order/register/', OrderRegister.as_view())
+    path('order/register/', OrderRegister.as_view()),
+    path('api/product/', ProductListAPI.as_view()),
+    path('api/product/<int:pk>', ProductDetailAPI.as_view())
 ]
