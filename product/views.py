@@ -8,6 +8,7 @@ from .forms import RegisterForm
 from .models import Product
 from .serializers import ProductSerializer
 
+
 class ProductListAPI(generics.GenericAPIView, mixins.ListModelMixin):
     # 데이터의 검증을 위해 serializer 등록 필수
     serializer_class = ProductSerializer
@@ -17,6 +18,7 @@ class ProductListAPI(generics.GenericAPIView, mixins.ListModelMixin):
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
+
 
 class ProductDetailAPI(generics.GenericAPIView, mixins.RetrieveModelMixin):
     # 데이터의 검증을 위해 serializer 등록 필수
@@ -36,6 +38,7 @@ class ProductList(ListView):
     # templates/product.html에서 object_list 대신 사용할 이름
     context_object_name = 'product_list'
 
+
 @method_decorator(admin_required, name='dispatch')
 class ProductRegister(FormView):
     template_name = 'register_product.html'
@@ -51,6 +54,7 @@ class ProductRegister(FormView):
         )
         product.save()
         return super().form_valid(form)
+
 
 class ProductDetail(DetailView):
     template_name = 'product_detail.html'
