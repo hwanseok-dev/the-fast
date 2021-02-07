@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
@@ -24,10 +23,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
-# Application definition
-
+BATON = {
+    'SUPPORT_HREF': 'https://github.com/hwanseok-dev',
+    'COPYRIGHT': 'copyright © 2017 <a href="https://github.com/hwanseok-dev">hwanseok</a>',  # noqa
+    'POWERED_BY': '<a href="https://github.com/hwanseok-dev">hwanseok</a>',
+    'MENU_TITLE': 'Menu'
+}
 INSTALLED_APPS = [
+    'baton',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -36,9 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'rest_framework',
-    'fcuser',
-    'product',
-    'order'
+    'fcuser.apps.FcuserConfig',
+    'product.apps.ProductConfig',
+    'order.apps.OrderConfig',
+    'baton.autodiscover',
 ]
 
 MIDDLEWARE = [
@@ -76,7 +80,6 @@ try:
 except ImportError:
     pass
 
-
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -95,20 +98,18 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-kr'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/

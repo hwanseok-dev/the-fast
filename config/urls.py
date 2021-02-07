@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from fcuser.views import index, logout, RegisterView, LoginView
 from product.views import (
     ProductList, ProductRegister, ProductDetail,
@@ -9,6 +9,7 @@ from order.views import OrderList, OrderRegister
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('baton/', include('baton.urls')),
     path('', index),
     path('login/', LoginView.as_view()),
     path('logout/', logout),

@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Fcuser(models.Model):
-    email = models.EmailField(verbose_name="이메일", unique=True)
+    email = models.EmailField(max_length=256, verbose_name="이메일", unique=True)
     level = models.CharField(max_length=8, verbose_name="등급",
                              choices=(
                                  ('admin', 'admin'),
