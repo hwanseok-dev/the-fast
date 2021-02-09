@@ -11,9 +11,11 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+# BASE_DIR = os.path.dirname(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -27,7 +29,39 @@ BATON = {
     'SUPPORT_HREF': 'https://github.com/hwanseok-dev',
     'COPYRIGHT': 'copyright © 2017 <a href="https://github.com/hwanseok-dev">hwanseok</a>',  # noqa
     'POWERED_BY': '<a href="https://github.com/hwanseok-dev">hwanseok</a>',
-    'MENU_TITLE': 'Menu'
+    'MENU_TITLE': 'Menu',
+    'MENU': (
+        {'type': 'title', 'label': 'main', 'apps': ('auth', 'fcuser', 'product', 'order')},
+        {
+            'type': 'app',
+            'name': 'fcuser',
+            'label': '사용자',
+            'icon': 'fa fa-lock',
+            'models': (
+                {
+                    'name': 'fcuser',
+                    'label': '사용자'
+                },
+            )
+        },
+        {
+            'type': 'app',
+            'name': 'product',
+            'label': '상품',
+            'icon': 'fa fa-lock',
+            'models': (
+                {
+                    'name': 'product',
+                    'label': '상품'
+                },
+            )
+        },
+        {'type': 'free', 'label': '주문', 'default_open': True, 'children': [
+            {'type': 'model', 'label': '주문', 'name': 'order', 'app': 'order'},
+            {'type': 'free', 'label': '최근 주문', 'url': '/admin/order/order/date_view'},
+        ]},
+        {'type': 'free', 'label': '메뉴얼', 'url': '/admin/manual'}
+    )
 }
 INSTALLED_APPS = [
     'baton',
@@ -60,7 +94,9 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

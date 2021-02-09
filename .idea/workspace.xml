@@ -5,13 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d8f04f21-ed15-4c5a-b792-709457b51def" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/order/templates/admin/order_date_view.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/nikla.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/the-fast.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/the-fast.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/order/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order/templates/admin/order_change_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/order/templates/admin/order_change_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/admin/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/admin/manual.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +50,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../venv/thefast/Scripts/autopep8.exe" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/order/templates/admin" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -71,6 +69,7 @@
       <recent name="D:\dev\PycharmProjects\the-fast\product" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\dev\PycharmProjects\the-fast\templates\admin" />
       <recent name="D:\dev\PycharmProjects\the-fast\order\templates" />
     </key>
   </component>
@@ -112,7 +111,7 @@
       <workItem from="1612509295595" duration="17106000" />
       <workItem from="1612612364980" duration="21183000" />
       <workItem from="1612685001511" duration="17033000" />
-      <workItem from="1612854368249" duration="1842000" />
+      <workItem from="1612854368249" duration="5242000" />
     </task>
     <servers />
   </component>

@@ -1,13 +1,34 @@
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from fcuser.views import index, logout, RegisterView, LoginView
 from product.views import (
     ProductList, ProductRegister, ProductDetail,
     ProductListAPI, ProductDetailAPI
 )
 from order.views import OrderList, OrderRegister
+from django.views.generic import TemplateView
+from django.template.response import TemplateResponse
+
+origin_index = admin.site.index
+
+
+def thefast_index(request, extra_context=None):
+    # return TemplateResponse(request, 'admin/index.html', extra_context)
+    extra_context = {'test':'test'}
+    return origin_index(request, extra_context)
+
+
+admin.site.index = thefast_index
 
 urlpatterns = [
+    re_path(r'^admin/manual/$', TemplateView.as_view(
+        template_name='admin/manual.html',
+        extra_context={
+            'title': '메뉴얼',
+            'site_title': "HwanSeok's BackOffice",
+            'site_header': "HwanSeok's BackOffice"
+        }
+    )),
     path('admin/', admin.site.urls),
     path('baton/', include('baton.urls')),
     path('', index),
