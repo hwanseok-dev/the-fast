@@ -8,13 +8,27 @@ from product.views import (
 from order.views import OrderList, OrderRegister
 from django.views.generic import TemplateView
 from django.template.response import TemplateResponse
+import datetime
+from order.models import Order
+from .functions import get_exchange
 
 origin_index = admin.site.index
 
 
 def thefast_index(request, extra_context=None):
     # return TemplateResponse(request, 'admin/index.html', extra_context)
-    extra_context = {'test':'test'}
+    base_date = datetime.datetime.now() - datetime.timedelta(days=7)
+    order_data = {}
+    for i in range(7):
+        target_dttm = base_date + datetime.timedelta(days=i)
+        date_key = target_dttm.strftime('%Y-%m-%d')
+        target_date = datetime.date(target_dttm.year, target_dttm.month, target_dttm.day)
+        order_cnt = Order.objects.filter(register_date__date=target_date).count()
+        order_data[date_key] = order_cnt
+    extra_context = {
+        'orders': order_data,
+        'exchange': get_exchange()
+    }
     return origin_index(request, extra_context)
 
 

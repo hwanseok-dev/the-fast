@@ -1,5 +1,6 @@
 # dev_settings.py
 dev_settings.py
+secret_key.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
